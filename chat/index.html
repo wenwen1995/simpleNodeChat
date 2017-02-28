@@ -1,0 +1,58 @@
+<html>
+<head>
+	<meta charset="UTF-8" http-equiv="Content-Type" content="text/html">
+	<title>socket.IO chat</title>
+</head>
+<body>
+      即将开始的聊天：&nbsp;
+      <ul id="incomingChatMessages"></ul>
+      <br />
+      <input type="text" id="outgoingChatMessages">
+      <input type="button" name="submit_btn" id="submit_btn" value="发言">
+	  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+      <!-- <script src="/node_modules/jquery/dist/jquery.min.js"></script> -->
+      <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	  <!-- <script src="http://localhost:7788/socket.io/socket.io.js"></script> -->
+      <script type="text/javascript">
+    	$(function(){
+    		var iosocket = io.connect('http://localhost:7788/');
+
+    		iosocket.on('connect',function(){
+    			$('#incomingChatMessages').append($('<li>Connected</li>'));
+    		});
+
+    		iosocket.on('message',function(){
+    			$('#incomingChatMessages').append($('<li></li>')).text(message);
+    		});
+
+    		iosocket.on('disconnect',function(){
+    			$('#incomingChatMessages').append('<li>disconnected</li>');
+    		});
+
+    		$('#outgoingChatMessages').keypress(function(event){
+               if(event.which == 13){ //按下回车键
+                  event.preventDefault();
+                  iosocket.send($('#outgoingChatMessages').val());
+                  var val = $('#outgoingChatMessages').val();
+                  var $li = $('<li></li>');
+                  $li.append(val)
+                  console.log($li);
+                  // $('#incomingChatMessages').append($('<li></li>')).text(val);
+                  $('#outgoingChatMessages').val('');
+               }
+    		});
+
+            $('#submit_btn').on('click',function(){
+                iosocket.send($('#outgoingChatMessages').val());
+                var val = $('#outgoingChatMessages').val();
+                var $li = $('<li></li>');
+                  $li.append(val);
+                  $('#incomingChatMessages').append($li)
+                  console.log($li);
+                // $('#incomingChatMessages').append($('<li></li>')).text(val);
+                $('#outgoingChatMessages').val('');
+            });
+    	})
+    </script>
+</body>
+</html>
