@@ -17,11 +17,11 @@
 
 
 具体最终的效果图如下：
-![](https://github.com/wenwen1995/simpleNodeChat/chat/gif/1.gif)
+![](https://github.com/wenwen1995/simpleNodeChat/tree/master/chat/gif/1.gif)
 
 即实现了打开两个浏览器，实现即时的聊天通信，但是有点小问题，就是一方作为发送方，发送方页面可以看到之前发送的内容，另一方作为接收方，但接收方收到的内容却是每次覆盖前面的内容，代码写的有问题，仔细研究了下，之后变成这样就正确了，就类似于我们聊天的时候接收人和发送方都能看到各自发送的消息：
 
-![](https://github.com/wenwen1995/simpleNodeChat/chat/gif/2.gif)
+![](https://github.com/wenwen1995/simpleNodeChat/tree/master/chat/gif/2.gif)
 
 接下来就是开始这个项目的步骤了：
 
